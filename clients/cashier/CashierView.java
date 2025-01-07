@@ -91,12 +91,12 @@ public class CashierView implements Observer
     
     theBtremove.setBounds( 16, 100+60*1, 80, 40 );      // Remove button 
     theBtremove.addActionListener(                     // Call back code
-      e -> cont.doBuy() );
+      e -> cont.doRem() );
     cp.add( theBtremove );                             //  Add to canvas
     
     theBtclear.setBounds( 16, 100+60*2, 80, 40 );      // Clear button 
     theBtclear.addActionListener(                     // Call back code
-      e -> cont.doBuy() );
+      e -> cont.doCle() );
     cp.add( theBtclear );                             //  Add to canvas
 
     theBtBought.setBounds( 300, 320, 80, 40 );   // Pay Button

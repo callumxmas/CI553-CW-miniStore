@@ -26,13 +26,13 @@ public class CustomerView implements Observer
   private static final int H = 400;       // Height of window pixels
   private static final int W = 400;       // Width  of window pixels
 
-  private final JLabel      pageTitle  = new JLabel();
-  private final JLabel      theAction  = new JLabel();
-  private final JTextField  theInput   = new JTextField();
-  private final JTextArea   theOutput  = new JTextArea();
+  private final JLabel      pageTitle  = new JLabel(); //title
+  private final JLabel      theAction  = new JLabel(); //message
+  private final JTextField  theInput   = new JTextField(); //search bar
+  private final JTextArea   theOutput  = new JTextArea(); //result box
   private final JScrollPane theSP      = new JScrollPane();
-  private final JButton     theBtCheck = new JButton( Name.CHECK );
-  private final JButton     theBtClear = new JButton( Name.CLEAR );
+  private final JButton     theBtCheck = new JButton( Name.CHECK ); //check button 
+  private final JButton     theBtClear = new JButton( Name.CLEAR ); //clear button
 
   private Picture thePicture = new Picture(80,80);
   private StockReader theStock   = null;
