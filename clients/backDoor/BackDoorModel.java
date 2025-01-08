@@ -8,11 +8,13 @@ import middle.MiddleFactory;
 import middle.StockException;
 import middle.StockReadWriter;
 
+import java.io.Console;
 import java.util.Observable;
 
 /**
  * Implements the Model of the back door client
  */
+
 public class BackDoorModel extends Observable
 {
   private Basket      theBasket  = null;            // Bought items
@@ -90,7 +92,7 @@ public class BackDoorModel extends Observable
    * @param productNum The product number of the item
    * @param quantity How many to be added
    */
-  public void doRStock(String productNum, String quantity )
+  public void doRStock(String productNum, String quantity, boolean checked )
   {
     String theAction = "";
     theBasket = makeBasket();
@@ -115,10 +117,60 @@ public class BackDoorModel extends Observable
   
       if ( theStock.exists( pn ) )              // Stock Exists?
       {                                         // T
+    	if (checked==false) {theAction="Please Check Stock, press Remove again to confirm.";}
+      	else { 
         theStock.addStock(pn, amount);          //  Re stock
         Product pr = theStock.getDetails(pn);   //  Get details
         theBasket.add(pr);                      //
         theAction = "";                         // Display 
+      }}
+    	else {                                  // F
+        theAction =                             //  Inform Unknown
+          "Unknown product number " + pn;       //  product number
+      }
+    } catch( StockException e )
+    {
+      theAction = e.getMessage();
+    }
+    setChanged(); notifyObservers(theAction);
+  }
+  
+  public void doRemStock(String productNum, String quantity, boolean checked )
+  {
+  	String theAction = "";
+    theBasket = makeBasket();
+    pn  = productNum.trim();                    // Product no.
+    String pn  = productNum.trim();             // Product no.
+    int amount = 0;
+    try
+    {
+      String aQuantity = quantity.trim();
+      try
+      {
+        amount = Integer.parseInt(aQuantity);   // Convert
+        if ( amount < 0)
+          throw new NumberFormatException("-ve");
+      }
+      catch ( Exception err)
+      {
+        theAction = "Invalid quantity";
+        setChanged(); notifyObservers(theAction);
+        return;
+      }
+  
+      if ( theStock.exists( pn ) )              // Stock Exists?
+      { 
+    	if (checked==false) {theAction="Please Check Stock, press Remove again to confirm.";}
+    	else { 
+    	Product pr = theStock.getDetails(pn);   //  Get details
+    	if (amount<pr.getQuantity()) {    // enough stock to remove?
+        theStock.addStock(pn, -amount);          //  Remove stock
+        pr = theStock.getDetails(pn);   //  Get details
+        theBasket.add(pr);                      //
+        theAction = "";                         // Display 
+    	} else {
+    		theAction = "Invalid Quantity";
+    	}}
       } else {                                  // F
         theAction =                             //  Inform Unknown
           "Unknown product number " + pn;       //  product number
@@ -129,6 +181,8 @@ public class BackDoorModel extends Observable
     }
     setChanged(); notifyObservers(theAction);
   }
+  
+  
 
   /**
    * Clear the product()
@@ -140,6 +194,12 @@ public class BackDoorModel extends Observable
     theAction = "Enter Product Number";       // Set display
     setChanged(); notifyObservers(theAction);  // inform the observer view that model changed
   }
+  
+  
+  public void newPro(String desc, String quantity, String Price) {
+	//CREATE NEW PRODUCT USING description, quantity and price
+  }
+  
   
   /**
    * return an instance of a Basket

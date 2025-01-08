@@ -9,6 +9,8 @@ public class BackDoorController
 {
   private BackDoorModel model = null;
   private BackDoorView  view  = null;
+  public boolean remchecked = false;
+  public boolean rchecked = false;
   /**
    * Constructor
    * @param model The model 
@@ -34,9 +36,16 @@ public class BackDoorController
    * @param pn       The product number to be re-stocked
    * @param quantity The quantity to be re-stocked
    */
-  public void doRStock( String pn, String quantity )
+  public void doRStock( String pn, String quantity ) //add stock
   {
-    model.doRStock(pn, quantity);
+    model.doRStock(pn, quantity, rchecked);
+    rchecked = !rchecked; //switch checked
+  }
+  
+  public void doRemStock( String pn, String quantity) //remove stock
+  {
+    model.doRemStock(pn, quantity, remchecked);
+    remchecked = !remchecked; //switch checked
   }
 
   /**
@@ -46,7 +55,10 @@ public class BackDoorController
   {
     model.doClear();
   }
-
   
+  public void newPro(String desc, String price, String quantity) {
+    model.newPro(desc, price, quantity);
+  }
+
 }
 
