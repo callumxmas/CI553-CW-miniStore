@@ -19,7 +19,7 @@ public class BackDoorModel extends Observable
 {
   private Basket      theBasket  = null;            // Bought items
   private String      pn = "";                      // Product being processed
-
+  private String      theAction = "";
   private StockReadWriter theStock     = null;
 
   /*
@@ -49,6 +49,7 @@ public class BackDoorModel extends Observable
     return theBasket;
   }
 
+
   /**
    * Check The current stock level
    * @param productNum The product number
@@ -64,7 +65,7 @@ public class BackDoorModel extends Observable
    */
   public void doQuery(String productNum )
   {
-    String theAction = "";
+    theAction = "";
     pn  = productNum.trim();                    // Product no.
     try
     {                 //  & quantity
@@ -94,7 +95,7 @@ public class BackDoorModel extends Observable
    */
   public void doRStock(String productNum, String quantity, boolean checked )
   {
-    String theAction = "";
+    theAction = "";
     theBasket = makeBasket();
     pn  = productNum.trim();                    // Product no.
     String pn  = productNum.trim();             // Product no.
@@ -195,9 +196,9 @@ public class BackDoorModel extends Observable
     setChanged(); notifyObservers(theAction);  // inform the observer view that model changed
   }
   
-  
-  public void newPro(String desc, String quantity, String Price) {
-	//CREATE NEW PRODUCT USING description, quantity and price
+  public String getTheAction()
+  {
+    return theAction;
   }
   
   

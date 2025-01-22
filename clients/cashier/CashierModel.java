@@ -13,7 +13,7 @@ import java.util.Observable;
  */
 public class CashierModel extends Observable
 {
-  private enum State { process, checked }
+  public enum State { process, checked }
 
   private State       theState   = State.process;   // Current state
   private Product     theProduct = null;            // Current product
@@ -237,5 +237,13 @@ public class CashierModel extends Observable
   {
     return new BetterBasket();
   }
+  
+  public State getState() {
+	  return theState;
+	}
+  
+  public Product getProduct() {
+	  return theProduct; 
+	}
 }
   

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @version 3.0 Derby
  */
 
-class Setup 
+public class Setup 
 {
   private static String[] sqlStatements = {
 

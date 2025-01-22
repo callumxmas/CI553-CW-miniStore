@@ -57,7 +57,7 @@ public class BackDoorController
   }
   
   public void newPro(String desc, String price, String quantity) {
-    model.newPro(desc, price, quantity);
+    //model.newPro(desc, price, quantity);
   }
 
 }

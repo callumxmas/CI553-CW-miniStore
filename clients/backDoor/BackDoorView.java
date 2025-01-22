@@ -176,6 +176,8 @@ public class BackDoorView implements Observer
   {
     cont = c;
   }
+  
+  public String getAction() { return theAction.getText();}
 
   /**
    * Update the view, called by notifyObservers(theAction) in model,

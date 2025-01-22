@@ -26,7 +26,7 @@ public class CashierView implements Observer
   private static final String BOUGHT = "PAY";
 
   private final JLabel      pageTitle  = new JLabel();
-  private final JLabel      theAction  = new JLabel();
+  public final JLabel      theAction  = new JLabel();
   private final JTextField  theInput   = new JTextField();
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
